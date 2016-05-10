@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div ng-controller="HomeCtrl">
+        <span>{{message}}</span>
+    </div>
+
+    <script src="system.src.js"></script>
+    <script src="jquery.js"></script>
+    <script>
+        System.config({
+            defaultJSExtensions: true,
+            meta: {
+                "angular": {
+                    format: "global",
+                    exports: "angular",
+                }
+            }
+        });
+        System.import("main");
+
+        $(function() {
+            console.log("DOM ready");
+        });
+    </script>
+</body>
+</html>

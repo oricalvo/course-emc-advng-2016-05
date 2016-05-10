@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div ng-controller="HomeCtrl">
+        <button ng-click="doSomething()">Click me</button>
+        <span>{{message}}</span>
+    </div>
+
+    <script src="angular.js"></script>
+    <script>
+        var module = angular.module("myApp", []);
+
+        module.controller("HomeCtrl", function($scope) {
+            $scope.message = "XXX";
+
+            $scope.doSomething = function() {
+                alert("ddd");
+            }
+        });
+    </script>
+</body>
+</html>

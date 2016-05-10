@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-strict-di>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        [ng-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="HomeCtrl">
+        <button ng-click="doSomething()">Click me</button>
+        <span ng-cloak>{{message}}</span>
+    </div>
+
+    <script src="jquery.js"></script>
+    <script src="angular.js"></script>
+    <script>
+        $(function() {
+            console.log("DOM ready");
+        });
+
+        var module = angular.module("myApp", [], [function() {
+        }]);
+
+        var module = angular.module("myApp", []);
+        module.config([function() {
+        }]);
+
+        module.controller("HomeCtrl", ["$scope", function($scope) {
+            $scope.message = "XXX";
+
+            $scope.doSomething = function() {
+                alert("ddd");
+            }
+        }]);
+
+        module.service("MyService", [function() {
+        }]);
+
+        module.config([function() {
+            console.log("config");
+        }]);
+
+        module.run([function() {
+            console.log("run");
+        }]);
+
+        console.log(module);
+
+        setTimeout(function() {
+            var scope = angular.element("button").scope();
+            console.log(scope);
+        }, 1000);
+    </script>
+</body>
+</html>
