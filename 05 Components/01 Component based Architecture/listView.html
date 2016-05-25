@@ -1,0 +1,6 @@
+<ul>
+    <li ng-repeat="item in ctrl.items">
+        <span>{{item.name}}</span>
+        <button ng-click="ctrl.deleteItem(item, $index)">Delete</button>
+    </li>
+</ul>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <span>{{$$watchersCount}}</span>
+
+    <div ng-controller="HomeCtrl">
+        <button ng-click="addNumber()">Add Num</button>
+        <span>{{message}}</span>
+
+        <ul>
+            <li ng-repeat="num in nums track by $index">
+                <span>{{::num}}</span>
+            </li>
+        </ul>
+
+    </div>
+
+    <script src="angular.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

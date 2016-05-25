@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="angular-material.css" rel="stylesheet" />
+</head>
+<body layout="row">
+    <div layout="column" flex style="background-color: red;">
+        <div class="header" style="height: 3em;">
+            Header
+        </div>
+
+        <div class="content" flex layout="row" style="background-color: blue;">
+            <div class="side-bar">
+                Side Bar
+            </div>
+
+            <div class="main">
+                <div ng-controller="HomeCtrl">
+                    <md-button ng-click="doSomething()" class="md-raised">Click me</md-button>
+                    <span>{{message}}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Footer
+        </div>
+
+    </div>
+
+    <script src="angular.js"></script>
+    <script src="angular-animate.js"></script>
+    <script src="angular-messages.js"></script>
+    <script src="angular-aria.js"></script>
+    <script src="angular-material.js"></script>
+
+    <script>
+        var module = angular.module("myApp", ["ngMaterial"]);
+
+        module.controller("HomeCtrl", function($scope) {
+            $scope.message = "XXX";
+
+            $scope.doSomething = function() {
+                //alert("ddd");
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div ng-controller="HomeCtrl">
+        <div my-dir ng-if="flag"></div>
+    </div>
+
+    <script src="angular.js"></script>
+    <script>
+        var module = angular.module("myApp", []);
+
+        module.controller("HomeCtrl", function($scope) {
+            console.log("HomeCtrl");
+        });
+
+        module.directive("myDir", function($compile, $rootScope) {
+            return {
+                restrict: "A",
+                priority: 700,
+                compile: function(element) {
+                    console.log("myDir COMPILE", element.html());
+
+                    return function() {
+                    }
+                }
+            };
+        });
+    </script>
+</body>
+</html>

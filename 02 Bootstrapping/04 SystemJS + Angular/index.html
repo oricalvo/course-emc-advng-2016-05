@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html lang="en" id="html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,6 +7,14 @@
 <body>
     <div ng-controller="HomeCtrl">
         <span>{{message}}</span>
+
+        <button ng-click="showContacts()">Show Contacts</button>
+
+        <ul>
+            <li ng-repeat="contact in contacts">
+                <span>{{contact.name}}</span>
+            </li>
+        </ul>
     </div>
 
     <script src="system.src.js"></script>
@@ -21,6 +29,7 @@
                 }
             }
         });
+
         System.import("main");
 
         $(function() {

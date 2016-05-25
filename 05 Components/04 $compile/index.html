@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div ng-controller="HomeCtrl">
+        <ul>
+            <li ng-repeat="emp in emps">
+
+                <component-by-type model="obj"></component-by-type>
+
+                <employee model="emp"></employee>
+
+                <!--<programmer ng-if="emp.isProgrammer"></programmer>-->
+                <!--<manager ng-if="emp.isManager"></manager>-->
+            </li>
+        </ul>
+    </div>
+
+    <script src="angular.js"></script>
+    <script>
+        var module = angular.module("myApp", []);
+
+        module.config(function($compileProvider) {
+            $compileProvider.debugInfoEnabled(false);
+        });
+
+        module.controller("HomeCtrl", function($scope) {
+            $scope.emps = [
+                new Manager("A"),
+                new Programmer("B"),
+                new Manager("C"),
+            ];
+
+//            $scope.empsVM = $scope.emps.map(function(emp) {
+//                return {
+//                    emp: emp,
+//                    isProgrammer: (emp instanceof Programmer),
+//                    isManager: (emp instanceof Manager),
+//                };
+//            });
+        });
+
+        var empTypeToComponentName = {
+            "Manager": "manager",
+            "Programmer": "programmer",
+        };
+
+        module.directive("employee", function($compile, $rootScope) {
+            return {
+                scope: {
+                    model: "<",
+                },
+                link: function(scope, element, attrs) {
+                    var emp = scope.model;
+
+                    var componentName = empTypeToComponentName[emp.constructor.name];
+
+                    console.log(emp, componentName);
+
+                    var componentTemplate = "<" + componentName + "></" + componentName + ">";
+                    var componentElement = angular.element(componentTemplate);
+                    //console.log(html);
+                    element.append(componentElement);
+
+                    var linkFn = $compile(componentElement);
+                    var newScope = $rootScope.$new(true, scope);
+                    newScope[componentName] = emp;
+
+                    linkFn(newScope);
+
+
+                },
+                template: ""
+            };
+        });
+
+        module.directive("programmer", function() {
+            return {
+                template: "<h1>Programmer</h1>"
+            };
+        });
+
+        module.directive("manager", function() {
+            return {
+                template: "<h1>Manager {{manager.name}}</h1>",
+                compile: function() {
+                    console.log("Manager compile");
+
+                    return function postLink() {
+                        console.log("Manager link");
+                    }
+                },
+            };
+        });
+
+        function Employee(name) {
+            this.name = name;
+        }
+
+        function Manager(name) {
+            Employee.call(this, name);
+        }
+
+        Manager.prototype = Object.create(Employee.prototype);
+        Manager.prototype.constructor = Manager;
+
+        function Programmer(name) {
+            Employee.call(this, name);
+        }
+
+        Programmer.prototype = Object.create(Employee.prototype);
+        Programmer.prototype.constructor = Programmer;
+    </script>
+</body>
+</html>

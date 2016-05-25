@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div ng-controller="HomeCtrl">
+
+    </div>
+
+    <script src="angular.js"></script>
+    <script>
+        var module = angular.module("myApp", []);
+
+        module.config(function($provide) {
+            $provide.value("di", {
+                register: function(name, func) {
+                    $provide.factory(name, func);
+                },
+            });
+        });
+
+        module.run(function($injector, di) {
+            di.resolve = function(name) {
+                return $injector.get(name);
+            }
+        });
+
+        module.controller("HomeCtrl", function($scope, di) {
+            $scope.message = "XXX";
+
+            di.register("YYY", function() {
+                return 123;
+            });
+
+            var res = di.resolve("YYY");
+            console.log(res);
+
+            $scope.doSomething = function() {
+                alert("ddd");
+            }
+        });
+    </script>
+</body>
+</html>

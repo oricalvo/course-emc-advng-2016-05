@@ -1,0 +1,11 @@
+<h1>Home</h1>
+
+<list-view
+        items="ctrl.contacts"
+        on-item-delete="ctrl.deleteContact(item, index)"
+        component-name="list">
+</list-view>
+
+<div>
+    <input ng-model="ctrl.name" /><button ng-click="ctrl.add()">Add</button>
+</div>

@@ -1,0 +1,23 @@
+.message-box {
+    display: none;
+    position: fixed;
+    left: 0;
+    right:0;
+    top:0;
+    bottom:0;
+    background-color: rgba(100, 100, 100, 0.5);
+}
+
+.message-box.active {
+    display: block;
+}
+
+
+.message-box .inner {
+    width: 20em;
+    height: 10em;
+    background-color: white;
+    opacity: 1;
+    margin-left: auto;
+    margin-right: auto;
+}
